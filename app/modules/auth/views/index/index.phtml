@@ -1,0 +1,76 @@
+<div class="container__main">
+    <div class="container__main__header">
+        <div class="container__main__header__logo">
+            <h1 class="logo">RaLedge</h1>
+        </div>
+        <h2>A place to share knowledge and better understand the world</h2>
+        
+        <?php
+
+            if(isset($flashSession)){
+                $flashSession->output(); 
+
+                // print_r($flashSession->getMessages());
+            }
+            if(isset($regForm)){
+                $messages = $regForm->getMessages();
+                
+                if (count($messages)) {
+                    // foreach ($messages as $message) {
+                    echo "<h1 style='color:red;' class='alert alert-danger'>
+                        Something went wrong, Please fill the blank form and check the format.
+                    </h1>";
+                    // }
+                }
+            }
+            if(isset($loginForm)){
+                $login_messages = $loginForm->getMessages();
+                if(count($login_messages)){
+                    echo "<h1 style='color:red;' class='alert alert-danger'>
+                        Invalid given credentials.
+                    </h1>";
+                }
+            }
+
+            if(isset($success_messages)){
+                
+            }
+        ?>
+    </div>
+    <div class="container__main__form">
+        <div class="signup_container">
+            <form class="input_container" method="POST" action="/auth/index/signup">
+                <!-- <input type="text" name="nickname" placeholder="Nickname"> -->
+                <?php echo $regForm->render('nickname'); ?>
+                <br/>
+                <!-- <input type="email" name="email" placeholder="Email"> -->
+                <?php echo $regForm->render('email'); ?>
+                <br/>
+                <!-- <input type="password" name="password" placeholder="Password"> -->
+                <?php echo $regForm->render('password'); ?>
+                <br/>
+
+                <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+                    value='<?php echo $this->security->getToken() ?>'/>
+
+                <input type="submit" value="SignUp">
+            </form>
+
+        </div>
+        <div class="signin_container">
+            <form class="input_container" method="POST" action="/auth/index/login">
+                
+                <?php echo $loginForm->render('email'); ?>
+                <br/>
+                <?php echo $loginForm->render('password'); ?>
+                <br/>
+                
+                <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+                    value='<?php echo $this->security->getToken() ?>'/>
+
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</div>
+

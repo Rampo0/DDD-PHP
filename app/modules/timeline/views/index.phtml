@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Raledge</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->url->get('img/favicon.ico')?>"/>
+
+    <link rel="stylesheet" href="<?php echo $this->url->get('css/style.css')?>">
+    <link rel="stylesheet" href="<?php echo $this->url->get('css/mobile.css')?>">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header_container">
+            <header class="header container">
+                <div class="header__logo">
+                    <a class="no_a_default" href="/">
+                        <h1 class="logo no_a_default">RaLedge</h1>
+                    </a>
+                </div>
+                <nav class="header__nav">
+                    <ul class="header__nav__list">
+                        <li>
+                            <a href="/" class="active ripple" id="Home">Home</a>
+                        </li>
+                        <li>
+                            <a href="/timeline/index/question" class="ripple" id="Question">Question</a>
+                        </li>
+                        <li>
+                            <a href="/timeline/index/answer" class="ripple" id="Answer">Answer</a>
+                        </li>
+                        <li>
+                            <a href="/timeline/index/explore" class="ripple" id="Explore">Explore</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="header__search_box">
+                    <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Search RaLedge">
+                </div>
+                <div class="header__profileView">
+                        <!-- <a href="#"> <img src="<?php echo $this->url->get('img/test.png') ?>" alt="Profile Pic"> </a> -->
+                        <form method="POST" id="logoutForm" action="/auth/index/logout">
+                          
+                            <img id="avatar" src="<?php echo $this->url->get('img/test.png') ?>" alt="Profile Pic">
+                        </form>
+                </div>
+                <div class="header__que_btn">
+                    <a class="no_a_default" href="#" role="button" onclick="openModel(this)">Add Question</a>
+                </div>
+            </header>
+        </div>
+
+        <section class="section">
+            <main class="section__main">
+                <?php echo $this->getContent(); ?>
+            </main>
+        </section>
+
+
+        <div class="backdrop" onclick="closeModel()"> </div>
+        <div class="model_container" >
+            <div class="model">
+                <div class="model__exit">
+                    <span onclick="closeModel()">X</span>
+                    </div>
+                        <div class="model__inputbox">
+                            <form method="POST" id="addQuestionForm" action="/question/index/create">
+                                <?php 
+
+                                    if(isset($questionForm)){
+                                        echo $questionForm->render('question');
+                                    }
+                                    
+                                ?>
+
+                                <input type='hidden' name='posted_by_id'
+                                                    value='<?php echo $this->getDI()->getShared("session")->get('user_id'); ?>' />
+
+                                <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+                                                    value='<?php echo $this->security->getToken() ?>'/>
+
+                                <!-- <input type="text" name="question" placeholder="Start your question with &quot;What&quot;, &quot;How&quot;, &quot;Why&quot;, etc."> -->
+                            </form>
+                        </div>
+                        <div class="model__bottom">
+                            <a class="model__bottom__cancel" onclick="closeModel()">Cancel</a>
+                            <a class="model__bottom__add" id="askQuestionBtn">Add Question</a>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+
+    <script src="<?php echo $this->url->get('js/jquery.js') ?>"></script>
+    <script src="<?php echo $this->url->get('js/script.js') ?>"></script>
+
+</body>
+
+</html>

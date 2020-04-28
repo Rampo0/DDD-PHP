@@ -1,0 +1,46 @@
+<a href="#" role="button" onclick="openModelReply(this)">Reply <?php echo $question->question; ?></a>
+
+<?php 
+
+    foreach ($replies as $answer) {
+        echo "<h1>$answer->reply_message</h1>";
+    }
+
+?>
+
+<div class="reply_backdrop" onclick="closeModelReply()"> </div>
+<div class="model_reply_container" >
+    <div class="model">
+        <div class="model__exit">
+            <span onclick="closeModelReply()">X</span>
+        </div>
+        <div class="model__inputbox">
+                <form method="POST" id="addQuestionForm" action="/question/index/reply">
+                    <?php 
+
+                        if(isset($replyForm)){
+                            echo $replyForm->render('reply');
+                        }
+                        
+                    ?>
+
+                    <input type='hidden' name='question_id'
+                                        value='<?php echo $question->id ?>' />
+
+                    <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+                                        value='<?php echo $this->security->getToken() ?>'/>
+
+                </form>
+        </div>
+        <div class="model__bottom">
+            <a class="model__bottom__cancel" onclick="closeModelReply()">Cancel</a>
+            <a class="model__bottom__add" id="askQuestionBtn">Reply</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

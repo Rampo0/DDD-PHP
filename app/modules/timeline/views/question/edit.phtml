@@ -1,0 +1,28 @@
+<a href="#" role="button" onclick="openModelEdit(this)">Edit <?php echo $question->question; ?></a>
+
+<div class="edit_backdrop" onclick="closeModelEdit()"> </div>
+<div class="model_edit_container" >
+    <div class="model">
+        <div class="model__exit">
+            <span onclick="closeModelEdit()">X</span>
+        </div>
+        <div class="model__inputbox">
+                <form method="POST" id="addQuestionForm" action="/question/index/update">
+
+                <input type='text' name="question" value="<?php echo $question->question ?>"></input>
+
+                <input type='hidden' name='posted_by_id'
+                                value='<?php echo $question->id ?>' />
+
+                <input type='hidden' name='<?php echo $this->security->getTokenKey() ?>'
+                                value='<?php echo $this->security->getToken() ?>'/>
+
+</form>
+</div>
+<div class="model__bottom">
+<a class="model__bottom__cancel" onclick="closeModelEdit()">Cancel</a>
+<a class="model__bottom__add" id="askQuestionBtn">Update</a>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,13 @@
+{
+    "name": "anwar/raledge",
+    "authors": [
+        {
+            "name": "Rampo0",
+            "email": "36811859+Rampo0@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phalcon/devtools": "~4.0"
+    }
+}
