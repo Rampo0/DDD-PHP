@@ -1,1 +1,1 @@
-Raledge App : Question and Answer app with simple DDD architecture
+Raledge App : Question and Answer app with simple DDD
